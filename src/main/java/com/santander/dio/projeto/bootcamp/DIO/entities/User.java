@@ -5,14 +5,15 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
+import lombok.ToString;
 import java.time.LocalDate;
+
 @Entity
-@Table(name = "tb_users")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-
+@ToString
+@Table(name = "tb_users")
 public class User {
 
     @Id

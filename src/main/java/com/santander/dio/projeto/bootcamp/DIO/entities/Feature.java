@@ -6,17 +6,16 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@NoArgsConstructor
 @ToString
-@Table(name = "tb_accounts")
-public class Account {
+@EqualsAndHashCode
+@Table(name = "tb_features")
+public class Feature {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String number;
-    private String agency;
-    private Double balance;
-    private Double limit;
+    private String icon;
+    private String description;
 }
