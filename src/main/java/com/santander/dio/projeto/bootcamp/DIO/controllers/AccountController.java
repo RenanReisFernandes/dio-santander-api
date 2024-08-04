@@ -30,7 +30,7 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Account> findById(Long id){
+    public ResponseEntity<Account> findById(@PathVariable Long id){
         Optional<Account> optAccount = accountService.findById(id);
         if(optAccount.isEmpty()){
             throw new RuntimeException("A conta: "+ id + " não foi encontrada!");
@@ -38,4 +38,10 @@ public class AccountController {
         Account accountFound = optAccount.get();
         return ResponseEntity.status(HttpStatus.FOUND).body(accountFound);
     }
+
+    public ResponseEntity<Void> delete(Long id){
+        accountService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }
