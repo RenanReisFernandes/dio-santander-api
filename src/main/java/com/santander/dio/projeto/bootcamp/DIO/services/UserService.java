@@ -34,8 +34,20 @@ public class UserService {
         return userRepositorie.findById(id);
     }
 
-    public User update(User user, Long id){
-        return null;
+    public User update(User userUpdated, Long id){
+       Optional<User> optUser = userRepositorie.findById(id);
+       if(optUser.isPresent()){
+           User userPresent = optUser.get();
+           userPresent.setAddress(userUpdated.getAddress());
+           userPresent.setCpf(userUpdated.getCpf());
+           userPresent.setBirthDate(userUpdated.getBirthDate());
+           userPresent.setPhoneNumber(userUpdated.getPhoneNumber());
+           userPresent.setName(userUpdated.getName());
+
+           return userRepositorie.save(userPresent);
+       }else{
+           throw new RuntimeException("Paciente "+ id + " não encontrado!");
+       }
     }
 
     public void delete(Long id){
