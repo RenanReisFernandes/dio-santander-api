@@ -38,4 +38,16 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FOUND).body(userFound);
         }
     }
+
+    @PutMapping
+    public ResponseEntity<User> update(@RequestBody User userUpdated){
+        User userSaved = userService.save(userUpdated);
+        return ResponseEntity.status(HttpStatus.OK).body(userSaved);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
