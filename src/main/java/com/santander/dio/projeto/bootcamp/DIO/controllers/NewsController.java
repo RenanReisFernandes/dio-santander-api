@@ -29,7 +29,8 @@ public class NewsController {
         return ResponseEntity.status(HttpStatus.FOUND).body(newsFound);
     }
 
-    public ResponseEntity<News> foundById(Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<News> foundById(@PathVariable Long id){
         Optional<News>optNews = newService.findById(id);
         if(optNews.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -37,5 +38,16 @@ public class NewsController {
 
            return ResponseEntity.status(HttpStatus.FOUND).body(optNews.get());
         }
+    }
+
+    @PutMapping
+    public ResponseEntity<News> update(@RequestBody News news){
+        News newsSaved = newService.save(news);
+        return ResponseEntity.status(HttpStatus.OK).body(newsSaved);
+    }
+
+    public ResponseEntity<Void> delete(Long id){
+        newService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
