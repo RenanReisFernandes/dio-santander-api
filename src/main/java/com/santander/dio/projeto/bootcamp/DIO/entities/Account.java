@@ -15,8 +15,11 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String number;
     private String agency;
     private Double balance;
-    private Double limit;
+
+    @Column(name = "account_limit")
+    private Double accountLimit;
 }
