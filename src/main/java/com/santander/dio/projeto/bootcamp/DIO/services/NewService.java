@@ -36,10 +36,15 @@ public class NewService {
             existentNews.setDescription(newsUpdated.getDescription());
 
          return   newsRepositorie.save(existentNews);
+
         }else{
             throw new RuntimeException("Dados não encontrados para: "+ id);
         }
-
     }
+
+    public void delete(Long id){
+        newsRepositorie.deleteById(id);
+    }
+
 
 }
