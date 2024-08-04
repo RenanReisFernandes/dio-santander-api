@@ -13,7 +13,7 @@ public class UserService {
     @Autowired
     private UserRepositorie userRepositorie;
 
-    public User create(User user){
+    public User save(User user){
         boolean existCpf = false;
         Optional<User> optUser = userRepositorie.findByCpf(user.getCpf());
         if(optUser.isPresent()){
