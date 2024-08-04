@@ -33,10 +33,10 @@ public class AccountController {
     public ResponseEntity<Account> findById(@PathVariable Long id){
         Optional<Account> optAccount = accountService.findById(id);
         if(optAccount.isEmpty()){
-            throw new RuntimeException("A conta: "+ id + " não foi encontrada!");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         Account accountFound = optAccount.get();
-        return ResponseEntity.status(HttpStatus.FOUND).body(accountFound);
+        return ResponseEntity.status(HttpStatus.FOUND).body(optAccount.get());
     }
 
     public ResponseEntity<Void> delete(Long id){

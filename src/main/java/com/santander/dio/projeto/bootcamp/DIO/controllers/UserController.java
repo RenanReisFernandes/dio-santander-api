@@ -32,10 +32,10 @@ public class UserController {
     public ResponseEntity<User> findById(@PathVariable Long id){
         Optional<User> optUser = userService.findById(id);
         if(optUser.isEmpty()){
-            throw new RuntimeException("Usuário "+ id + " não encontrado!");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }else {
             User userFound = optUser.get();
-            return ResponseEntity.status(HttpStatus.FOUND).body(userFound);
+            return ResponseEntity.status(HttpStatus.FOUND).body(optUser.get());
         }
     }
 
