@@ -1,6 +1,9 @@
 package com.santander.dio.projeto.bootcamp.DIO.controllers;
 
+import com.santander.dio.projeto.bootcamp.DIO.DTO.request.UserRequest;
+import com.santander.dio.projeto.bootcamp.DIO.DTO.response.UserResponse;
 import com.santander.dio.projeto.bootcamp.DIO.entities.User;
+import com.santander.dio.projeto.bootcamp.DIO.mapper.UserMapper;
 import com.santander.dio.projeto.bootcamp.DIO.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +20,11 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user){
+    public ResponseEntity<UserResponse> save(@RequestBody UserRequest userRequest){
+        User user = UserMapper.toUser(userRequest);
         User userSaved = userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userSaved);
+        UserResponse userResponse = UserMapper.toUserResponse(userSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
 
     @GetMapping
