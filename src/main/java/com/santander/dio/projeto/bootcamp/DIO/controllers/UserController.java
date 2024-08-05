@@ -28,9 +28,10 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll(){
+    public ResponseEntity<List<UserResponse>> findAll(){
         List<User> foundList = userService.findAll();
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundList);
+        List<UserResponse> userResponseList = UserMapper.toUserResponseList(foundList);
+        return ResponseEntity.status(HttpStatus.FOUND).body(userResponseList);
     }
 
     @GetMapping(value = "/{id}")
