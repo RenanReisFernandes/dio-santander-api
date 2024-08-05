@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -24,4 +26,12 @@ public class User {
     private String phoneNumber;
     private LocalDate birthDate;
     private String address;
+    @OneToMany
+    private Set<Account> accounts;
+    @OneToOne
+    private Card card;
+    @OneToMany
+    private List<Feature> features;
+    @OneToMany
+    private List<News> news;
 }
