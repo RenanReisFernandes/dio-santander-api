@@ -1,6 +1,9 @@
 package com.santander.dio.projeto.bootcamp.DIO.controllers;
 
+import com.santander.dio.projeto.bootcamp.DIO.DTO.request.UserRequest;
+import com.santander.dio.projeto.bootcamp.DIO.DTO.response.UserResponse;
 import com.santander.dio.projeto.bootcamp.DIO.entities.User;
+import com.santander.dio.projeto.bootcamp.DIO.mapper.UserMapper;
 import com.santander.dio.projeto.bootcamp.DIO.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,32 +20,38 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user){
+    public ResponseEntity<UserResponse> save(@RequestBody UserRequest userRequest){
+        User user = UserMapper.toUser(userRequest);
         User userSaved = userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userSaved);
+        UserResponse userResponse = UserMapper.toUserResponse(userSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll(){
+    public ResponseEntity<List<UserResponse>> findAll(){
         List<User> foundList = userService.findAll();
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundList);
+        List<UserResponse> userResponseList = UserMapper.toUserResponseList(foundList);
+        return ResponseEntity.status(HttpStatus.FOUND).body(userResponseList);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id){
+    public ResponseEntity<UserResponse> findById(@PathVariable Long id){
+
         Optional<User> optUser = userService.findById(id);
+
         if(optUser.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }else {
-            User userFound = optUser.get();
-            return ResponseEntity.status(HttpStatus.FOUND).body(optUser.get());
+            return ResponseEntity.status(HttpStatus.FOUND).body(UserMapper.toUserResponse(optUser.get()));
         }
     }
 
     @PutMapping
-    public ResponseEntity<User> update(@RequestBody User userUpdated){
-        User userSaved = userService.save(userUpdated);
-        return ResponseEntity.status(HttpStatus.OK).body(userSaved);
+    public ResponseEntity<UserResponse> update(@RequestBody UserRequest request){
+        User user = UserMapper.toUser(request);
+        User userSaved = userService.save(user);
+        UserResponse response = UserMapper.toUserResponse(userSaved);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{id}")
