@@ -47,9 +47,11 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<User> update(@RequestBody User userUpdated){
-        User userSaved = userService.save(userUpdated);
-        return ResponseEntity.status(HttpStatus.OK).body(userSaved);
+    public ResponseEntity<UserResponse> update(@RequestBody UserRequest request){
+        User user = UserMapper.toUser(request);
+        User userSaved = userService.save(user);
+        UserResponse response = UserMapper.toUserResponse(userSaved);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{id}")
