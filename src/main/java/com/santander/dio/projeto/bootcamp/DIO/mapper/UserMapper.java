@@ -4,6 +4,9 @@ import com.santander.dio.projeto.bootcamp.DIO.DTO.request.UserRequest;
 import com.santander.dio.projeto.bootcamp.DIO.DTO.response.UserResponse;
 import com.santander.dio.projeto.bootcamp.DIO.entities.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserMapper {
 
     public static User toUser(UserRequest userRequest){
@@ -24,5 +27,13 @@ public class UserMapper {
         userResponse.setNews(user.getNews());
         userResponse.setFeatures(user.getFeatures());
         return userResponse;
+    }
+
+    public static List<UserResponse> toUserResponseList(List<User> users){
+        List<UserResponse> responses = new ArrayList<>();
+        for(User user : users){
+            responses.add(toUserResponse(user));
+        }
+        return responses;
     }
 }

@@ -34,8 +34,10 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id){
+    public ResponseEntity<UserResponse> findById(@PathVariable Long id){
+
         Optional<User> optUser = userService.findById(id);
+        User user = UserMapper.toUserResponse(optUser);
         if(optUser.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }else {
