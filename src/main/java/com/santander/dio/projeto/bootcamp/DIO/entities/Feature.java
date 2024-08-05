@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Transactional
@@ -22,6 +23,5 @@ public class Feature {
     private Long id;
     private String icon;
     private String description;
-    @OneToMany
-    private List<Account> account;
+
 }
