@@ -44,4 +44,9 @@ public class CardController {
         return  ResponseEntity.status(HttpStatus.OK).body(cardUpdated);
     }
 
+    @DeleteMapping("/{id}")
+    public void  delete(@PathVariable Long id){
+        cardService.delete(id);
+    }
+
 }

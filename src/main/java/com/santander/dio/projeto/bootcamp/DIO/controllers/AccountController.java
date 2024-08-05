@@ -39,7 +39,8 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.FOUND).body(optAccount.get());
     }
 
-    public ResponseEntity<Void> delete(Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
         accountService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
