@@ -5,6 +5,7 @@ import com.santander.dio.projeto.bootcamp.DIO.repositories.CardRepositorie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,10 @@ public class CardService {
             throw new RuntimeException("O cartão: "+ card.getId()+ " já está cadastrado no sistema");
         }
         return cardRepositorie.save(card);
+    }
+
+    public List<Card> findAll(){
+        List<Card> cardFound = cardRepositorie.findAll();
+        return cardFound;
     }
 }
