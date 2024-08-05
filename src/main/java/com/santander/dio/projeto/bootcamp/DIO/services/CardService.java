@@ -29,4 +29,22 @@ public class CardService {
         List<Card> cardFound = cardRepositorie.findAll();
         return cardFound;
     }
+
+    public Optional<Card> findById(Long id){
+        return cardRepositorie.findById(id);
+    }
+
+    public Card update(Card cardSaved, Long id){
+        Optional<Card> optCard = cardRepositorie.findById(id);
+
+        if(optCard.isPresent()){
+            Card existentCard = optCard.get();
+
+            existentCard.setNumber(cardSaved.getNumber());
+            existentCard.setLimit(cardSaved.getLimit());
+
+            cardRepositorie.save(existentCard);
+        }
+        throw new RuntimeException("Cartão : "+ id + "não encontrado");
+    }
 }
