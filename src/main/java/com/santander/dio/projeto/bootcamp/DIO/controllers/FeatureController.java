@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/feature")
@@ -25,5 +26,10 @@ public class FeatureController {
     public ResponseEntity<List<Feature>> findAll(){
         List<Feature> list = featureService.findAll();
         return ResponseEntity.status(HttpStatus.FOUND).body(list);
+    }
+
+    public ResponseEntity<Optional<Feature>> findById(Long id){
+        Optional<Feature> featureFound = featureService.findById(id);
+        return ResponseEntity.status(HttpStatus.FOUND).body(featureFound);
     }
 }
