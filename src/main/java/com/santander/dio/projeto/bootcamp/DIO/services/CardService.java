@@ -47,4 +47,8 @@ public class CardService {
         }
         throw new RuntimeException("Cartão : "+ id + "não encontrado");
     }
+
+    public void  delete(Long id){
+        cardRepositorie.deleteById(id);
+    }
 }
