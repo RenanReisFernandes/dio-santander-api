@@ -38,12 +38,11 @@ public class UserController {
     public ResponseEntity<UserResponse> findById(@PathVariable Long id){
 
         Optional<User> optUser = userService.findById(id);
-        User user = UserMapper.toUserResponse(optUser);
+
         if(optUser.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }else {
-            User userFound = optUser.get();
-            return ResponseEntity.status(HttpStatus.FOUND).body(optUser.get());
+            return ResponseEntity.status(HttpStatus.FOUND).body(UserMapper.toUserResponse(optUser.get()));
         }
     }
 
