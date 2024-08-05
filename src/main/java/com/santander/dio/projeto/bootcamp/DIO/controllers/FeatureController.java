@@ -39,4 +39,10 @@ public class FeatureController {
         Feature featureUpdated = featureService.save(feature);
         return ResponseEntity.status(HttpStatus.OK).body(featureUpdated);
     }
+
+    @DeleteMapping
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        featureService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
