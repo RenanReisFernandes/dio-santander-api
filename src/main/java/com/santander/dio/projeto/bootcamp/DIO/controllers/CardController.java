@@ -29,11 +29,19 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.FOUND).body(foundCard);
     }
 
-    public ResponseEntity<Card> findById(Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<Card> findById(@PathVariable Long id){
         Optional<Card> optCard = cardService.findById(id);
         if(optCard.isEmpty()){
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(optCard.get());
     }
+
+    @PutMapping
+    public ResponseEntity<Card> update(@RequestBody Card card){
+        Card cardUpdated = cardService.save(card);
+        return  ResponseEntity.status(HttpStatus.OK).body(cardUpdated);
+    }
+
 }
