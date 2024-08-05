@@ -1,7 +1,6 @@
 package com.santander.dio.projeto.bootcamp.DIO.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -14,7 +13,12 @@ import lombok.*;
 @Table(name = "tb_cards")
 public class Card {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String number;
+
+    @Column(name = "card_limit")
     private Double limit;
 }
