@@ -28,8 +28,15 @@ public class FeatureController {
         return ResponseEntity.status(HttpStatus.FOUND).body(list);
     }
 
-    public ResponseEntity<Optional<Feature>> findById(Long id){
+    @GetMapping
+    public ResponseEntity<Optional<Feature>> findById(@PathVariable Long id){
         Optional<Feature> featureFound = featureService.findById(id);
         return ResponseEntity.status(HttpStatus.FOUND).body(featureFound);
+    }
+
+    @PutMapping
+    public ResponseEntity<Feature> update(@RequestBody Feature feature){
+        Feature featureUpdated = featureService.save(feature);
+        return ResponseEntity.status(HttpStatus.OK).body(featureUpdated);
     }
 }
