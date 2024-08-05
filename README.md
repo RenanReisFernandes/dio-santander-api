@@ -1,7 +1,7 @@
 
 <h1 align="center">
  DESAFIO DIO MODELAGEM DE BANCO PARA DESAFIO SANTANDER
- <h3 align ="center" >Projeto de modelagem de diagrama UML do Iphone ☕</h3> 
+ <h3 align ="center" >Projeto de modelagem de backend de simulação de aplicação bancária ☕</h3> 
 </h1>
 
 ### 📕 SOBRE 
