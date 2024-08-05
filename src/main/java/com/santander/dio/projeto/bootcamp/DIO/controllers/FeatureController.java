@@ -28,7 +28,7 @@ public class FeatureController {
         return ResponseEntity.status(HttpStatus.FOUND).body(list);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Feature>> findById(@PathVariable Long id){
         Optional<Feature> featureFound = featureService.findById(id);
         return ResponseEntity.status(HttpStatus.FOUND).body(featureFound);
@@ -40,7 +40,7 @@ public class FeatureController {
         return ResponseEntity.status(HttpStatus.OK).body(featureUpdated);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         featureService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
