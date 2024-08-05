@@ -5,6 +5,9 @@ import com.santander.dio.projeto.bootcamp.DIO.DTO.response.UserResponse;
 import com.santander.dio.projeto.bootcamp.DIO.entities.User;
 import com.santander.dio.projeto.bootcamp.DIO.mapper.UserMapper;
 import com.santander.dio.projeto.bootcamp.DIO.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Operation(summary = "Realiza inserção de usuários", method = "POST")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Inserção realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "401", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro de servidor")
+
+    })
     @PostMapping
     public ResponseEntity<UserResponse> save(@RequestBody UserRequest userRequest){
         User user = UserMapper.toUser(userRequest);
@@ -27,6 +39,15 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
 
+    @Operation(summary = "Realiza busca de todos os usuários cadastrados", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "401", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro de servidor")
+
+    })
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll(){
         List<User> foundList = userService.findAll();
@@ -34,6 +55,15 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.FOUND).body(userResponseList);
     }
 
+    @Operation(summary = "Realiza busca de um usuário através do ID", method = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Busca realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "401", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro de servidor")
+
+    })
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserResponse> findById(@PathVariable Long id){
 
@@ -46,6 +76,15 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Realiza atualização dos dados de um usuário através do ID", method = "PUT")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Atualização realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "401", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro de servidor")
+
+    })
     @PutMapping
     public ResponseEntity<UserResponse> update(@RequestBody UserRequest request){
         User user = UserMapper.toUser(request);
@@ -54,6 +93,15 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @Operation(summary = "Realiza deleção de um usuário através do ID", method = "DELETE")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Deleção realizada com sucesso"),
+            @ApiResponse(responseCode = "422", description = "Dados de requisição inválidos"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "401", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro de servidor"),
+
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);
