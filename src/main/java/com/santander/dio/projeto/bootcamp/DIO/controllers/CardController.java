@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/card")
@@ -28,5 +29,11 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.FOUND).body(foundCard);
     }
 
-    
+    public ResponseEntity<Card> findById(Long id){
+        Optional<Card> optCard = cardService.findById(id);
+        if(optCard.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(optCard.get());
+    }
 }
