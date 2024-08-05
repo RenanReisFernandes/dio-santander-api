@@ -14,15 +14,32 @@ public class FeatureService {
     @Autowired
     private FeatureRepositorie featureRepositorie;
 
-    public Feature save(Feature feature){
+    public Feature save(Feature feature) {
         return featureRepositorie.save(feature);
     }
 
-    public List<Feature> findAll(){
+    public List<Feature> findAll() {
         return featureRepositorie.findAll();
     }
 
-    public Optional<Feature> findById(Long id){
-       return featureRepositorie.findById(id);
+    public Optional<Feature> findById(Long id) {
+        return featureRepositorie.findById(id);
+    }
+
+    public Feature update(Feature upatedFeature, Long id) {
+        Optional<Feature> optFeature = featureRepositorie.findById(id);
+
+        if (optFeature.isPresent()) {
+            Feature existentFeature = optFeature.get();
+
+            existentFeature.setIcon(upatedFeature.getIcon());
+            existentFeature.setDescription(upatedFeature.getDescription());
+
+            return featureRepositorie.save(existentFeature);
+        } else {
+
+            throw new RuntimeException("Feature: " + id + " não encontrada!");
+        }
+
     }
 }
