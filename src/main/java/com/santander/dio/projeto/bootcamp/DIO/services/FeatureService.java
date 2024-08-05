@@ -37,9 +37,11 @@ public class FeatureService {
 
             return featureRepositorie.save(existentFeature);
         } else {
-
             throw new RuntimeException("Feature: " + id + " não encontrada!");
         }
+    }
 
+    public void delete(Long id){
+        featureRepositorie.deleteById(id);
     }
 }
