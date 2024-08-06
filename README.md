@@ -54,3 +54,18 @@ classDiagram
     User --> "1" Card : hasOne
     User --> "1" Feature : hasMany
     User --> "1" News : hasMany
+```
+
+    
+
+    ### 🔨 FERRAMENTAS UTILIZADAS
+
+- [**JAVA**](https://docs.oracle.com/en/java/)
+- [**SPRING BOOT**](https://docs.spring.io/spring-boot/index.html)
+- [**GIT**](https://git-scm.com/doc)
+- [**GITHUB**](https://docs.github.com/pt)
+- [**H2**](https://www.h2database.com/html/main.html)
+- [**POSTGRESQL**](https://www.h2database.com/html/main.html)
+- [**SWAGGER**](https://swagger.io/docs/)
+- [**POSTMAN**](https://learning.postman.com/docs/introduction/overview/)
+- [**RAILWAY**](https://railway.app/)
