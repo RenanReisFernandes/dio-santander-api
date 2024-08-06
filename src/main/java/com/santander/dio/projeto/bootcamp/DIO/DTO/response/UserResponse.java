@@ -4,6 +4,7 @@ import com.santander.dio.projeto.bootcamp.DIO.entities.Account;
 import com.santander.dio.projeto.bootcamp.DIO.entities.Card;
 import com.santander.dio.projeto.bootcamp.DIO.entities.Feature;
 import com.santander.dio.projeto.bootcamp.DIO.entities.News;
+import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.*;
@@ -19,7 +20,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @ToString
 public class UserResponse {
-
+    @Column(unique = true)
     private String name;
     @OneToMany
     private Set<Account> accounts;
