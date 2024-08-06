@@ -3,6 +3,8 @@ package com.santander.dio.projeto.bootcamp.DIO.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -19,8 +21,8 @@ public class Account {
     private String number;
     @Column(nullable = false)
     private String agency;
-    private Double balance;
+    private BigDecimal balance;
 
-    @Column(name = "account_limit")
-    private Double accountLimit;
+    @Column(name = "account_limit", scale = 2, precision = 13)
+    private BigDecimal accountLimit;
 }
