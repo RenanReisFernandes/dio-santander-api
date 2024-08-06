@@ -21,17 +21,22 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String cpf;
+    @Column(nullable = false)
     private String phoneNumber;
+    @Column(nullable = false)
     private LocalDate birthDate;
+    @Column(nullable = false)
     private String address;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Account> accounts;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Card card;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Feature> features;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<News> news;
 }

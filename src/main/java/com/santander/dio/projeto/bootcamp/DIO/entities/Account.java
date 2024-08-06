@@ -15,8 +15,9 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false)
     private String number;
+    @Column(nullable = false)
     private String agency;
     private Double balance;
 
